@@ -9,7 +9,7 @@
   const heroConsult = document.querySelector('.hero-consult');
   const desktopNavigation = matchMedia('(min-width: 1280px)');
   const desktopContact = matchMedia('(min-width: 1024px)');
-  const phoneSelector = 'a[data-contact="phone"][href^="tel:"]:not([aria-disabled="true"])';
+  const phoneSelector = 'a[data-contact="phone"][data-phone-tel]:not([aria-disabled="true"])';
   const barPhone = bar?.querySelector(phoneSelector);
   const barHome = bar ? document.createComment('Phone action position') : null;
   const groups = [...document.querySelectorAll('[data-cta-group]')];
@@ -19,6 +19,18 @@
   let reservedHeight = 72;
 
   if (bar && barHome) bar.before(barHome);
+
+  function configurePhoneLinks() {
+    // Device type, rather than window width, keeps narrow PC windows on-page.
+    const canCall = /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (!canCall) return;
+    const number = document.getElementById('contact-phone')?.textContent.trim();
+    document.querySelectorAll(phoneSelector).forEach(link => {
+      link.setAttribute('href', link.dataset.phoneTel);
+      if (number) link.setAttribute('aria-label', `${number}に電話で相談する`);
+    });
+  }
 
   function restoreBar() {
     if (bar && barHome?.parentNode && bar.previousSibling !== barHome) {
@@ -205,6 +217,7 @@
   bar?.addEventListener('focusout', schedule);
 
   try {
+    configurePhoneLinks();
     update();
     root.classList.add('js');
     active = true;

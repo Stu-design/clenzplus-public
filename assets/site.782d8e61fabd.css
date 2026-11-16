@@ -436,3 +436,6 @@ footer nav{font-size:.8125rem}
   .contact-action,.hero-consult .contact-action{flex-direction:column}
   .header-contact .contact-action,.fixed-cta .contact-action{flex-direction:row}
 }
+
+/* Telephone actions on PCs land directly on the selectable contact number. */
+#contact-phone{scroll-margin-top:var(--header-offset,150px)}
