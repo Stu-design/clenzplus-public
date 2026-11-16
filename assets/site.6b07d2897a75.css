@@ -417,3 +417,22 @@ footer nav{font-size:.8125rem}
 .button:active{transform:translateY(0)}
 }
 }
+
+/* Client-provided LINE link, confirmed 2026-11-17. */
+.contact-action .button{min-width:0}
+.button.line,.works .button.line,.contact .button.line{background:#087F45;border-color:#087F45;color:white}
+.button.line:hover,.works .button.line:hover,.contact .button.line:hover{background:#066536;border-color:#066536}
+.header-contact .contact-action{max-width:none}
+.header-contact .button{flex:none;width:auto}
+@media(max-width:1023px){.header-contact .button.line{display:none}}
+@media(max-width:767px){
+  .contact-action .button{padding-inline:12px;font-size:.875rem;gap:6px}
+  .contact-action .button:after{margin-left:0}
+  .hero-consult .button.phone,.hero-consult .button.line{font-size:.875rem;min-height:60px}
+  .fixed-cta .contact-action{flex-direction:row}
+  .fixed-cta .button{padding-inline:10px;min-height:56px}
+}
+@media(max-width:359px){
+  .contact-action,.hero-consult .contact-action{flex-direction:column}
+  .header-contact .contact-action,.fixed-cta .contact-action{flex-direction:row}
+}

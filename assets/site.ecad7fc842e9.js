@@ -56,15 +56,18 @@
     if (!menu?.open) syncHeaderOffset();
   }
 
-  function hasVisiblePhoneAction() {
+  function hasVisibleContactActions() {
     const top = (header?.getBoundingClientRect().bottom || 0) + 8;
     const bottom = window.innerHeight - reservedHeight - 8;
     return groups.some(group => {
       const contacts = [...group.querySelectorAll('[data-contact]')];
-      if (contacts.length !== 1 || !contacts[0].matches(phoneSelector)) return false;
-      const rect = contacts[0].getBoundingClientRect();
-      return rect.width > 0 && rect.height > 0 && rect.top >= top &&
-        rect.bottom <= bottom && rect.left >= 0 && rect.right <= window.innerWidth;
+      const barContacts = [...bar.querySelectorAll('[data-contact]')];
+      return barContacts.every(action => contacts.some(contact => {
+        if (contact.dataset.contact !== action.dataset.contact || contact.href !== action.href) return false;
+        const rect = contact.getBoundingClientRect();
+        return rect.width > 0 && rect.height > 0 && rect.top >= top &&
+          rect.bottom <= bottom && rect.left >= 0 && rect.right <= window.innerWidth;
+      }));
     });
   }
 
@@ -78,7 +81,9 @@
 
     if (desktopContact.matches) {
       if (bar.contains(document.activeElement)) {
-        const replacement = header?.querySelector(phoneSelector) ||
+        const focusedContact = document.activeElement?.dataset.contact;
+        const replacement = (focusedContact === 'line' && header?.querySelector('[data-contact="line"]')) ||
+          header?.querySelector(phoneSelector) ||
           [...document.querySelectorAll(phoneSelector)].find(link => !bar.contains(link)) ||
           document.getElementById('contact') || document.body;
         focusElement(replacement);
@@ -107,7 +112,7 @@
     root.style.setProperty('--cta-height', `${reservedHeight}px`);
     const focused = bar.contains(document.activeElement);
     const canSuppress = 'IntersectionObserver' in window;
-    bar.hidden = Boolean(menu?.open || (!focused && canSuppress && hasVisiblePhoneAction()));
+    bar.hidden = Boolean(menu?.open || (!focused && canSuppress && hasVisibleContactActions()));
   }
 
   function fallback() {
