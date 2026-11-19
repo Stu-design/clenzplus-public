@@ -439,3 +439,39 @@ footer nav{font-size:.8125rem}
 
 /* Telephone actions on PCs land directly on the selectable contact number. */
 #contact-phone{scroll-margin-top:var(--header-offset,150px)}
+
+/* Client changes, 2026-11-19: live text rating and supplied before/after photos. */
+.hero-review{position:absolute;right:28px;bottom:28px;z-index:3;width:250px;max-width:calc(100% - 32px);padding:18px 20px 10px;background:#fff;color:#123B56;border:1px solid #CADDE9;box-shadow:0 8px 24px #123B5614;line-height:1.5}
+.hero-review p{margin:0}
+.hero-review .hero-review-source{font-size:.875rem;font-weight:700;letter-spacing:.02em}
+.hero-review .hero-review-scope{font-size:.75rem;margin-top:4px}
+.hero-review .hero-review-score{display:flex;align-items:baseline;gap:4px;margin:2px 0;font-variant-numeric:tabular-nums}
+.hero-review-score strong{font-size:2.625rem;line-height:1.15;letter-spacing:-.04em;font-weight:800}
+.hero-review-score>span{font-size:.875rem}
+.hero-review-score .hero-review-stars{font-family:Arial,sans-serif;color:#A55213;font-size:.75rem;letter-spacing:.03em;margin-left:auto;align-self:center}
+.hero-review .hero-review-count{font-size:.875rem;font-weight:600}
+.hero-review .hero-review-date{font-size:.75rem;color:#425E71;margin-top:3px}
+.hero-review>a{display:flex;align-items:center;min-height:44px;margin-top:6px;border-top:1px solid #D9E7EF;font-size:.8125rem;text-decoration:underline;text-underline-offset:3px}
+.work-comparison{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;align-items:start}
+.work-comparison .work-main{min-width:0;max-width:none;padding:10px;margin:0}
+.work-photo{aspect-ratio:870/654;overflow:hidden;background:#EAF3F8}
+/* Original JPEG pixels retained; only the supplied black padding is outside the frame. */
+.work-comparison .work-photo img{display:block;width:100%;height:auto;max-width:none;aspect-ratio:auto;object-fit:fill;transform:translateY(-32.62486716%)}
+.work-comparison .work-main figcaption{margin:0;padding:12px 4px 2px;font-size:.9375rem;font-weight:700;color:#fff;line-height:1.5}
+.business-data dd{min-width:0;overflow-wrap:anywhere}
+@media(max-width:767px){
+ .hero-photo{display:grid;height:auto;min-height:340px;padding-top:120px}
+ .hero-photo>picture{position:absolute;inset:0}
+ .hero-review{position:relative;right:auto;bottom:auto;justify-self:end;align-self:end;margin:0 16px 12px;width:224px;padding:12px 16px 6px}
+ .hero-review-score strong{font-size:2.25rem}
+ .hero-review .hero-review-scope{margin-top:2px}
+ .hero-review>a{margin-top:4px}
+ .work-comparison{grid-template-columns:minmax(0,1fr);gap:24px}
+ .work-comparison .work-main figcaption{font-size:.875rem}
+ .about h2{font-size:clamp(1.5rem,6.5vw,2.25rem);line-height:1.6;overflow-wrap:anywhere}
+}
+@media(max-width:359px){.hero-photo{min-height:320px}}
+@media print{
+ .work-comparison .work-main figcaption{color:#000}
+ .work-comparison .work-main{break-inside:avoid}
+}
